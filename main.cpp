@@ -179,20 +179,27 @@ void shared_pointer_example() {
 
 }
 
+/* cpp11 - constexpr 
+* creates an expression that the compiler can guarantee won't change at runtime
+*/
+constexpr double return_pi() {
+	return 22.0 / 7.0; 
+}
+
 int main() {
 
-#define POINTER_EXAMPLES true
+#define POINTER_EXAMPLES false
 
 	// create a vector of ints, fill it with 0-19 incrementally, then modify the vector 
 	vector<int> workHorse;
-	fill_vector(workHorse, 20); 
+	fill_vector(workHorse, 20);
 	modify_vector(workHorse);
 
 	// show the contents of the vector
-	cout << "What is in the vector? " << endl; 
+	cout << "What is in the vector? " << endl;
 	for (auto x : workHorse)
 		cout << x << " ";
-	cout << endl; 
+	cout << endl;
 
 	// locate the first even number found 
 	find_if_example(workHorse);
@@ -200,9 +207,9 @@ int main() {
 	// variadic function example
 	// in practice you wouldn't really want to do this iterator dereferencing and stating + 1, + 2 .. but just for demonstration purposes to show it's possible to do it 
 	cout << endl << "We'll ask the variadic function to access the values from index 0, ascending" << endl;
-	const auto arbiraryValue = workHorse.begin(); 
+	const auto arbiraryValue = workHorse.begin();
 
-	output_values( *arbiraryValue
+	output_values(*arbiraryValue
 		, *(arbiraryValue + 1)
 		, *(arbiraryValue + 2)
 		, *(arbiraryValue + 3)
@@ -211,11 +218,16 @@ int main() {
 
 #if POINTER_EXAMPLES
 	// demo of unique pointers
-	cout << endl << "---- Unique pointers: " << endl; 
+	cout << endl << "---- Unique pointers: " << endl;
 	unique_pointer_example();
 
 	// demo of shared pointers
 	cout << endl << "---- Shared pointers: " << endl;
 	shared_pointer_example();
 #endif
+
+
+	// constexpr 
+	cout << endl << return_pi() << endl;
+
 }
